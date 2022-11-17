@@ -92,7 +92,7 @@ const Home = () => {
             <h2 className="mb-6 font-sans text-3xl font-bold tracking-tight text-white sm:text-4xl sm:leading-none">
               Dynamic cover images
               <br className="hidden md:block" />
-              for your{" "}
+              {" "}for your{" "}
               <span className="relative inline-block px-2">
                 <div className="absolute inset-0 transform -skew-x-12 bg-cyan-accent-400" />
                 <span className="relative text-cyan-900">GitHub</span>
