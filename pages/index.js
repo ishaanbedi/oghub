@@ -261,7 +261,7 @@ const Home = () => {
       </div>
       <footer className="lg:md:flex hidden absolute bottom-0 w-full justify-center items-center">
         <p className="lg:md:sm:text-sm text-xs py-2 text-center">
-          The project is still in development. <br />
+          The project is still in development. 
           Things might break. Check out the{" "}
           <span className="underline underline-offset-4 hover:text-gray-700">
             <Link href="/upcoming"> upcoming features.</Link>
