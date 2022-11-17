@@ -1,3 +1,4 @@
+import Head from "next/head";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 const Home = () => {
@@ -8,6 +9,9 @@ const Home = () => {
   const [thumbnail, setThumbnail] = useState("");
   const [projectName, setProjectName] = useState("");
   const [placeHolder, setPlaceHolder] = useState("");
+  const [randomPlaceholderExamples, setRandomPlaceholderExamples] = useState(
+    []
+  );
   const generator = async () => {
     setLoading(true);
     var data = await fetch(`https://api.github.com/repos/${repoLink}`);
@@ -30,7 +34,7 @@ const Home = () => {
   const copyURL = () => {
     setLoading(true);
     var link = document.createElement("input");
-    link.value = `oghub.vercel.app/api/link?repo=${projectName}`;
+    link.value = `https://oghub.vercel.app/api/link?repo=${projectName}`;
     document.body.appendChild(link);
     link.select();
     document.execCommand("copy");
@@ -44,15 +48,14 @@ const Home = () => {
     "vercel/hyper",
     "xtermjs/xterm.js",
     "supabase/supabase",
-    "webpack/webpack",
     "nuxt/nuxt.js",
     "denoland/deno",
     "vercel/next.js",
     "sveltejs/svelte",
-    "freeCodeCamp/freeCodeCamp",
     "openai/whisper",
     "apple/swift",
     "v8/v8",
+    "vuejs/vue",
   ];
   useEffect(() => {
     setPlaceHolder(
@@ -60,8 +63,10 @@ const Home = () => {
         Math.floor(Math.random() * placeholderExamples.length)
       ]
     );
+    setRandomPlaceholderExamples(
+      placeholderExamples.sort(() => Math.random() - 0.3).slice(0, 3)
+    );
   }, []);
-  // if user presses esc key, close the modal
   useEffect(() => {
     const handleEsc = (e) => {
       if (e.keyCode === 27) {
@@ -75,7 +80,37 @@ const Home = () => {
   }, []);
 
   return (
-    <section className="">
+    <section>
+      <Head>
+        <title>OGHub</title>
+        <meta
+          name="description"
+          content="Generate Dynamic Cover Image for your GitHub Repositories"
+        />
+        <meta
+          name="keywords"
+          content="open graph, github, github open graph, github open graph image "
+        />
+        <meta name="author" content="Ishaan Bedi" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta property="og:title" content="OGHub" />
+        <meta
+          property="og:description"
+          content="Generate Dynamic Cover Image for your GitHub Repositories"
+        />
+        <meta property="og:image" content="/og.png" />
+        <meta property="og:url" content="https://oghub.vercel.app" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@ishnbedi" />
+        <meta name="twitter:creator" content="@ishnbedi" />
+        <meta name="twitter:title" content="OGHub" />
+        <meta
+          name="twitter:description"
+          content="Generate Dynamic Cover Image for your GitHub Repositories"
+        />
+        <meta name="twitter:image" content="/og.png" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <div className="relative bg-blue-accent-400 py-32">
         <div className="absolute inset-x-0 bottom-0">
           <svg
@@ -90,17 +125,16 @@ const Home = () => {
         <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
           <div className="relative max-w-2xl sm:mx-auto sm:max-w-xl md:max-w-2xl sm:text-center">
             <h2 className="mb-6 font-sans text-3xl font-bold tracking-tight text-white sm:text-4xl sm:leading-none">
-              Dynamic cover images
-              <br className="hidden md:block" />
-              {" "}for your{" "}
+              Dynamic cover image
+              <br className="hidden md:block" /> for your{" "}
               <span className="relative inline-block px-2">
-                <div className="absolute inset-0 transform -skew-x-12 bg-cyan-accent-400" />
-                <span className="relative text-cyan-900">GitHub</span>
+                <div className="absolute inset-0 transform -skew-x-12 bg-white" />
+                <span className="relative text-blue-accent-400">GitHub</span>
               </span>{" "}
               project.
             </h2>
-            <p className="mb-6 text-base text-indigo-100 md:text-lg">
-              Just type in the username/repository and see the magic.
+            <p className="mb-6 text-base text-blue-50 md:text-lg">
+              Just type the username/repository and see the magic.
             </p>
             <form className="flex flex-col items-center w-full mb-4 md:flex-row md:px-16">
               <input
@@ -109,7 +143,7 @@ const Home = () => {
                 placeholder={`Eg. ${placeHolder}`}
                 required
                 type="text"
-                className="flex-grow w-full h-12 px-4 mb-3 text-white transition duration-200 border-2 border-transparent rounded appearance-none md:mr-2 md:mb-0 bg-blue-900 focus:border-cyan-accent-700 focus:outline-none focus:shadow-outline"
+                className="flex-grow w-full h-12 px-4 mb-3 text-white transition duration-200 border-2 border-transparent rounded appearance-none md:mr-2 md:mb-0 bg-blue-900 focus:border-blue-accent-700 focus:outline-none focus:shadow-outline"
               />
               <button
                 onClick={(e) => {
@@ -121,7 +155,7 @@ const Home = () => {
                   onClick={() => {
                     repoLink === "" ? null : generator();
                   }}
-                  className="inline-flex items-center cursor-pointer justify-center w-full h-12 px-6 font-semibold tracking-wide text-cyan-900 transition duration-200 rounded shadow-md md:w-auto hover:text-blue-900 bg-cyan-accent-400 hover:bg-cyan-accent-700 focus:shadow-outline focus:outline-none"
+                  className="inline-flex items-center cursor-pointer justify-center w-full h-12 px-6 font-semibold tracking-wide text-blue-accent-400 transition duration-200 rounded shadow-md md:w-auto hover:text-blue-900 bg-white hover:bg-blue-accent-100 focus:shadow-outline focus:outline-none"
                 >
                   {loading ? (
                     <svg
@@ -144,6 +178,25 @@ const Home = () => {
                 </a>
               </button>
             </form>
+          </div>
+          <div className="text-center pt-8">
+            <h3 className="text-white">Or try one of these examples:</h3>
+            <div className="flex space-x-2 justify-center items-center pt-4">
+              {randomPlaceholderExamples.map((example) => (
+                <button
+                  key={example}
+                  onClick={() => {
+                    setRepoLink(example);
+                    console.log(repoLink);
+                  }}
+                  className="focus:shadow-outline focus:outline-none"
+                >
+                  <a className="text-sm lg:md:px-2 px-1 py-2 backdrop-blur bg-white text-white bg-opacity-25 rounded-md hover:bg-opacity-20 shadow-2xl">
+                    {example}
+                  </a>
+                </button>
+              ))}
+            </div>
           </div>
         </div>
         {showOutput && (
@@ -185,13 +238,13 @@ const Home = () => {
                         <span className="space-x-2 flex">
                           <a
                             onClick={download}
-                            className="inline-flex items-center justify-center cursor-pointer w-full h-8 px-6 font-semibold tracking-wide text-cyan-900 transition duration-200 rounded shadow-md md:w-auto hover:text-blue-900 bg-cyan-accent-400 hover:bg-cyan-accent-700 focus:shadow-outline focus:outline-none lg:md:sm:text-md text-sm"
+                            className="inline-flex items-center justify-center cursor-pointer w-full h-8 px-6 font-semibold tracking-wide text-blue-accent-400 transition duration-200 rounded shadow-md md:w-auto hover:text-blue-900 bg-white hover:bg-blue-accent-100 focus:shadow-outline focus:outline-none lg:md:sm:text-md text-sm"
                           >
                             {downloading ? <>Downloading</> : <> Download</>}
                           </a>
                           <a
                             onClick={() => setShowOutput(false)}
-                            className="inline-flex items-center justify-center cursor-pointer w-full h-8 px-6 font-semibold tracking-wide text-cyan-900 transition duration-200 rounded shadow-md md:w-auto hover:text-blue-900 bg-cyan-accent-400 hover:bg-cyan-accent-700 focus:shadow-outline focus:outline-none lg:md:sm:text-md text-sm"
+                            className="inline-flex items-center justify-center cursor-pointer w-full h-8 px-6 font-semibold tracking-wide text-blue-accent-400 transition duration-200 rounded shadow-md md:w-auto hover:text-blue-900 bg-white hover:bg-blue-accent-100 focus:shadow-outline focus:outline-none lg:md:sm:text-md text-sm"
                           >
                             Close
                           </a>
@@ -206,7 +259,7 @@ const Home = () => {
           </>
         )}
       </div>
-      <footer className="absolute bottom-0 w-full flex justify-center items-center">
+      <footer className="lg:md:flex hidden absolute bottom-0 w-full justify-center items-center">
         <p className="lg:md:sm:text-sm text-xs py-2 text-center">
           The project is still in development. <br />
           Things might break. Check out the{" "}

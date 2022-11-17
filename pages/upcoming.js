@@ -1,3 +1,4 @@
+import Head from "next/head";
 import Link from "next/link";
 
 const Upcoming = () => {
@@ -10,32 +11,40 @@ const Upcoming = () => {
     "API support for custom image format and dimensions",
   ];
   return (
-    <div className="mx-2 flex flex-col h-screen justify-center items-center">
-      <h1 className="text-2xl font-bold text-center text-gray-800">
-        The upcoming features are:
-      </h1>
-      <div className="flex my-4 justify-center">
-        <ul className="px-2">
-          {upcoming.map((feature, id) => (
-            <li key={id}>
-              {id + 1}: {feature}.
-            </li>
-          ))}
-        </ul>
+    <section>
+      <Head>
+        <title>Upcoming Features</title>
+      </Head>
+      <div className="mx-2 flex flex-col h-screen justify-center items-center">
+        <h1 className="text-2xl font-bold text-center text-gray-800">
+          The upcoming features are:
+        </h1>
+        <div className="flex my-4 justify-center">
+          <ul className="px-2">
+            {upcoming.map((feature, id) => (
+              <li key={id}>
+                {id + 1}: {feature}.
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="flex space-x-2 justify-center">
+          <Link href="/">
+            <button className="bg-cyan-500 hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded">
+              Home
+            </button>
+          </Link>
+          <Link
+            target={"_blank"}
+            href="https://www.github.com/ishaanbedi/oghub"
+          >
+            <button className="bg-cyan-500 hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded">
+              Github
+            </button>
+          </Link>
+        </div>
       </div>
-      <div className="flex space-x-2 justify-center">
-        <Link href="/">
-          <button className="bg-cyan-500 hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded">
-            Home
-          </button>
-        </Link>
-        <Link target={"_blank"} href="https://www.github.com/ishaanbedi/oghub">
-          <button className="bg-cyan-500 hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded">
-            Github
-          </button>
-        </Link>
-      </div>
-    </div>
+    </section>
   );
 };
 
