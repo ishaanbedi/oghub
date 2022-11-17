@@ -1,4 +1,6 @@
 # OGHUB
+<img src="https://oghub.vercel.app/api/link?repo=ishaanbedi/oghub" alt="" width="800"/>
+
 Generate dynamic cover images for your GitHub project, in seconds.
 
 The project is still in development.
