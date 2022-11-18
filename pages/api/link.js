@@ -28,14 +28,14 @@ export default async function (req) {
           alignItems: "center",
           justifyContent: "center",
           background:
-            "linear-gradient(to left, rgb(55, 65, 81), rgb(17, 24, 39), rgb(0, 0, 0))",
+            "linear-gradient(to left, rgb(29, 78, 216), rgb(30, 64, 175), rgb(17, 24, 39))",
         }}
       >
         <div tw="flex  w-screen items-center px-8 text-white">
-          <div tw="max-w-xl text-left flex flex-col ">
+          <div tw="flex justify-center items-center flex-col w-screen">
             <img
               src={json.owner.avatar_url}
-              tw="rounded-full w-44 h-44 shadow-lg shadow-teal-500"
+              tw="rounded-full w-44 h-44 shadow-lg shadow-white"
             />
 
             <p>
@@ -54,7 +54,9 @@ export default async function (req) {
                 </span>
               )}
               {forks !== 0 && (
-                <span tw="mt-4 text-slate-100 text-2xl leading-relaxed px-3">|</span>
+                <span tw="mt-4 text-slate-100 text-2xl leading-relaxed px-3">
+                  |
+                </span>
               )}
               {forks !== 0 && (
                 <span tw="mt-4 text-slate-100 text-2xl leading-relaxed">
